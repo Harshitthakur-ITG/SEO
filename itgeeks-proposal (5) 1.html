@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Growth Partnership Proposal · IT Geeks</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1a6fe8;--blue-d:#1460cc;--blue-light:#e8f0fd;
+  --black:#0d0d0d;--gray-900:#1a1a1a;--gray-600:#5a5a5a;
+  --gray-400:#9a9a9a;--gray-200:#e8e8e8;--gray-100:#f4f4f4;
+  --white:#ffffff;--radius:12px;--green:#16a34a;--green-light:#dcfce7;
+  --amber:#d97706;--amber-light:#fef3c7;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--gray-900);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ── READING PROGRESS ── */
+#rp{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--blue),#5b9ef9);z-index:300;border-radius:0 2px 2px 0}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--gray-200);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.07)}
+nav img{height:30px}
+.nav-links{display:flex;gap:4px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--gray-600);text-decoration:none;padding:6px 12px;border-radius:8px;transition:background .2s,color .2s}
+.nav-links a:hover{background:var(--gray-100);color:var(--black)}
+.nav-links a.active{background:var(--blue-light);color:var(--blue)}
+.nav-cta{background:var(--blue);color:var(--white)!important;padding:8px 18px!important;border-radius:8px;font-weight:600!important;transition:background .2s,transform .15s!important}
+.nav-cta:hover{background:var(--blue-d)!important;transform:translateY(-1px)!important}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s cubic-bezier(.22,.68,0,1.2),transform .6s cubic-bezier(.22,.68,0,1.2)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+/* ── HERO ── */
+.hero{padding:80px 40px 80px;max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:20px;animation:badgePop .5s .2s both}
+@keyframes badgePop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.pulse-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:pd 2s infinite}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(36px,5vw,54px);line-height:1.1;color:var(--black);margin-bottom:18px;animation:su .6s .3s both}
+@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero-lead{font-size:16px;color:var(--gray-600);line-height:1.7;margin-bottom:28px;animation:su .6s .4s both}
+.hero-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;animation:su .6s .5s both}
+.meta-card{background:var(--gray-100);border-radius:var(--radius);padding:12px 16px;transition:background .2s,transform .2s;cursor:default}
+.meta-card:hover{background:var(--blue-light);transform:translateY(-2px)}
+.meta-card .label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:2px}
+.meta-card .value{font-size:13px;font-weight:600;color:var(--black)}
+.hero-ctas{display:flex;gap:12px;animation:su .6s .6s both;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;border:none;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s}
+.btn-primary:hover{background:var(--blue-d);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,111,232,.3)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:10px;border:1.5px solid var(--gray-200);cursor:pointer;text-decoration:none;transition:border-color .2s,background .2s,transform .15s}
+.btn-secondary:hover{border-color:var(--blue);background:var(--blue-light);color:var(--blue);transform:translateY(-2px)}
+.hero-visual{background:var(--black);border-radius:20px;padding:32px;color:var(--white);overflow:hidden;position:relative;animation:su .7s .35s both}
+.hero-visual::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--blue);border-radius:50%;opacity:.15;animation:blob 6s ease-in-out infinite}
+.hero-visual::after{content:'';position:absolute;bottom:-80px;left:-40px;width:160px;height:160px;background:#5b9ef9;border-radius:50%;opacity:.07;animation:blob 8s ease-in-out infinite reverse}
+@keyframes blob{0%,100%{transform:translate(0,0)}50%{transform:translate(12px,-16px)}}
+.hero-visual .vl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.service-pills{display:flex;flex-wrap:wrap;gap:8px}
+.service-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--white);cursor:default;transition:background .2s,transform .2s}
+.service-pill:hover{background:rgba(26,111,232,.35);transform:scale(1.05)}
+.service-pill .dot{width:6px;height:6px;background:var(--blue);border-radius:50%;flex-shrink:0}
+.hero-tagline{margin-top:24px;font-family:'DM Serif Display',serif;font-size:20px;line-height:1.3;color:var(--white)}
+.hero-tagline em{color:var(--blue);font-style:italic}
+
+/* trust strip in hero visual */
+.trust-strip{margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;gap:16px;flex-wrap:wrap}
+.trust-badge{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px}
+.trust-badge span{color:rgba(255,255,255,.8)}
+
+/* ── SECTIONS ── */
+section{max-width:960px;margin:0 auto;padding:72px 40px;border-top:1px solid var(--gray-200)}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(26px,4vw,38px);line-height:1.15;color:var(--black);margin-bottom:14px}
+.section-sub{font-size:15px;color:var(--gray-600);max-width:560px;line-height:1.7;margin-bottom:40px}
+
+/* ── URGENCY BADGE ── */
+.urgency-badge{display:inline-flex;align-items:center;gap:6px;background:var(--amber-light);color:var(--amber);font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;margin-bottom:20px}
+.urgency-badge .ud{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:pd 1.5s infinite}
+
+/* ── BIZ CARDS ── */
+.biz-card{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:24px 26px 28px;transition:border-color .25s,box-shadow .25s,transform .25s}
+.biz-card:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(26,111,232,.08);transform:translateY(-3px)}
+.biz-card .type{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.biz-card h3{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.2;margin-bottom:12px;color:var(--black)}
+.biz-card p{font-size:13px;color:var(--gray-600);line-height:1.7}
+
+/* ── TAGS ── */
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.tag{background:var(--gray-100);color:var(--gray-900);border:1px solid var(--gray-200);font-size:13px;font-weight:500;padding:5px 13px;border-radius:100px;transition:background .2s,color .2s,border-color .2s,transform .15s;cursor:default}
+.tag:hover{background:var(--blue-light);color:var(--blue);border-color:var(--blue);transform:scale(1.05)}
+
+/* ── KPI PILLS ── */
+.kpi-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.kpi-pill{display:flex;align-items:center;gap:7px;background:var(--blue-light);color:var(--blue);font-size:13px;font-weight:600;padding:7px 14px;border-radius:100px;transition:background .2s,color .2s,transform .2s;cursor:default}
+.kpi-pill:hover{background:var(--blue);color:var(--white);transform:scale(1.04)}
+.kpi-pill svg{width:13px;height:13px;flex-shrink:0}
+
+/* ── TABLE ── */
+.del-table{width:100%;border-collapse:collapse}
+.del-table th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);padding:0 14px 12px;border-bottom:1.5px solid var(--gray-200)}
+.del-table td{padding:13px 14px;font-size:13px;color:var(--gray-600);border-bottom:1px solid var(--gray-100);vertical-align:middle;transition:background .15s}
+.del-table td:first-child{color:var(--black);font-weight:500}
+.del-table tr:last-child td{border-bottom:none}
+.del-table tbody tr:hover td{background:var(--blue-light)}
+.check{color:var(--blue);font-size:15px}
+
+/* ── TABS ── */
+.tab-bar{display:flex;background:var(--gray-100);border-radius:10px;padding:4px;width:fit-content;margin-bottom:24px}
+.tab-btn{font-size:13px;font-weight:600;padding:8px 20px;border-radius:8px;border:none;background:none;cursor:pointer;color:var(--gray-600);transition:background .2s,color .2s,box-shadow .2s}
+.tab-btn.active{background:var(--white);color:var(--black);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── TIER DETAIL ── */
+.tier-detail{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:28px;display:grid;grid-template-columns:1fr 2fr;gap:36px;align-items:start}
+.tier-detail.blue{border-color:var(--blue);background:var(--blue);color:var(--white)}
+.t-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px}
+.tier-detail.blue .t-name{color:rgba(255,255,255,.6)}
+.t-price{font-family:'DM Serif Display',serif;font-size:34px;color:var(--black);line-height:1}
+.tier-detail.blue .t-price{color:var(--white)}
+.t-mo{font-size:12px;color:var(--gray-400);margin-top:3px}
+.tier-detail.blue .t-mo{color:rgba(255,255,255,.5)}
+.t-desc{font-size:13px;color:var(--gray-600);margin-top:14px;line-height:1.7}
+.tier-detail.blue .t-desc{color:rgba(255,255,255,.75)}
+.tier-detail .t-right ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tier-detail .t-right li{font-size:13px;color:var(--gray-700);padding:9px 12px;background:var(--gray-100);border-radius:8px;display:flex;align-items:center;gap:7px}
+.tier-detail.blue .t-right li{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+.tier-detail .t-right li::before{content:'✓';color:var(--blue);font-weight:700;font-size:11px;flex-shrink:0}
+.tier-detail.blue .t-right li::before{color:rgba(255,255,255,.6)}
+.tier-cta-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:20px;border-top:1px solid var(--gray-200);flex-wrap:wrap;gap:12px}
+.tier-detail.blue .tier-cta-row{border-top-color:rgba(255,255,255,.15)}
+
+/* ── EMAIL CARDS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
+.email-card{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s,box-shadow .2s}
+.email-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 8px 32px rgba(26,111,232,.08)}
+.email-card .etype{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.email-card h3{font-family:'DM Serif Display',serif;font-size:26px;color:var(--black);margin-bottom:3px}
+.email-card .per{font-size:12px;color:var(--gray-400);font-weight:500;margin-bottom:14px}
+.email-card p{font-size:13px;color:var(--gray-600);line-height:1.7}
+.vol-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.vol-table th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);padding:0 14px 10px;border-bottom:1.5px solid var(--gray-200)}
+.vol-table td{padding:11px 14px;font-size:13px;color:var(--gray-600);border-bottom:1px solid var(--gray-100);transition:background .15s}
+.vol-table td:first-child{color:var(--black);font-weight:500}
+.vol-table tr:last-child td{border-bottom:none}
+.vol-table tbody tr:hover td{background:var(--blue-light)}
+.sub-head{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gray-900);margin:28px 0 14px;padding-bottom:8px;border-bottom:1.5px solid var(--gray-200)}
+
+/* ── ADS ── */
+.ads-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ads-card{border:1.5px solid var(--gray-200);border-radius:var(--radius);padding:24px;transition:all .25s}
+.ads-card:hover{border-color:var(--blue);box-shadow:0 12px 40px rgba(26,111,232,.1);transform:translateY(-3px)}
+.ads-card .platform{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.ads-card h3{font-family:'DM Serif Display',serif;font-size:24px;color:var(--black);margin-bottom:3px}
+.ads-card .per{font-size:12px;color:var(--gray-400);margin-bottom:18px}
+.ads-card ul{list-style:none}
+.ads-card li{display:flex;justify-content:space-between;font-size:13px;color:var(--gray-700);padding:8px 0;border-bottom:1px solid var(--gray-100);transition:color .15s}
+.ads-card li:last-child{border-bottom:none}
+.ads-card li .chk{color:var(--blue);font-weight:700}
+
+/* ── CALCULATOR ── */
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.calc-sec-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:12px}
+.c-radio{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:1.5px solid var(--gray-200);border-radius:10px;margin-bottom:7px;cursor:pointer;transition:all .2s;user-select:none}
+.c-radio:hover,.c-radio.on{border-color:var(--blue);background:var(--blue-light)}
+.c-radio .rl{display:flex;align-items:center;gap:9px}
+.c-radio .rb{width:16px;height:16px;border-radius:50%;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .2s}
+.c-radio.on .rb{border-color:var(--blue)}
+.c-radio.on .rb::after{content:'';width:7px;height:7px;background:var(--blue);border-radius:50%;display:block}
+.c-radio .rname{font-size:13px;font-weight:500;color:var(--black)}
+.c-radio .rprice{font-size:12px;font-weight:600;color:var(--gray-400)}
+.c-radio.on .rprice{color:var(--blue)}
+.c-check{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border:1.5px solid var(--gray-200);border-radius:10px;margin-bottom:7px;cursor:pointer;transition:all .2s;user-select:none}
+.c-check:hover,.c-check.on{border-color:var(--blue);background:var(--blue-light)}
+.c-check .cl{display:flex;align-items:center;gap:9px}
+.c-check .cb{width:16px;height:16px;border-radius:5px;border:2px solid var(--gray-300);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.c-check.on .cb{border-color:var(--blue);background:var(--blue)}
+.c-check.on .cb::after{content:'✓';color:#fff;font-size:10px;font-weight:700}
+.c-check .cname{font-size:13px;font-weight:500;color:var(--black)}
+.c-check .cprice{font-size:12px;font-weight:600;color:var(--gray-400)}
+.c-check.on .cprice{color:var(--blue)}
+.total-box{background:var(--black);border-radius:var(--radius);padding:28px 32px;color:var(--white);position:relative;overflow:hidden;margin-top:24px}
+.total-box::before{content:'';position:absolute;top:-80px;right:-80px;width:220px;height:220px;background:var(--blue);border-radius:50%;opacity:.1}
+.total-box .tbl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.total-box h3{font-family:'DM Serif Display',serif;font-size:17px;color:var(--white);margin-bottom:20px;font-style:italic;line-height:1.4}
+#calc-lines .cl-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+#calc-lines .cl-row:last-child{border-bottom:none}
+#calc-lines .cl-row .cn{font-size:13px;color:rgba(255,255,255,.65)}
+#calc-lines .cl-row .cp{font-size:13px;font-weight:600;color:rgba(255,255,255,.9)}
+.total-row{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:18px;border-top:1.5px solid rgba(255,255,255,.15)}
+.total-row .tl{font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em}
+#total-display{font-family:'DM Serif Display',serif;font-size:30px;color:var(--white);display:inline-block;transition:transform .3s cubic-bezier(.22,.68,0,1.4)}
+#total-display.bump{transform:scale(1.18)}
+.total-note{font-size:11px;color:rgba(255,255,255,.3);margin-top:12px;font-style:italic}
+.calc-cta{width:100%;margin-top:16px;justify-content:center;font-size:14px}
+
+/* ── STEPS ── */
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.step-item{display:flex;gap:14px;align-items:flex-start;background:var(--gray-100);border-radius:var(--radius);padding:18px 20px;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s;border:1.5px solid transparent}
+.step-item:hover{background:var(--blue-light);border-color:rgba(26,111,232,.2);transform:translateY(-2px)}
+.step-item.done{background:var(--green-light);border-color:var(--green)}
+.step-num{width:30px;height:30px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--black);flex-shrink:0;transition:all .2s}
+.step-item.done .step-num{background:var(--green);color:var(--white);border-color:var(--green)}
+.step-item h4{font-size:13px;font-weight:600;color:var(--black);margin-bottom:2px}
+.step-item p{font-size:12px;color:var(--gray-600);line-height:1.5}
+
+/* ── SECTION CTA BANDS ── */
+.cta-band{background:var(--gray-100);border-radius:16px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:48px;flex-wrap:wrap}
+.cta-band.dark{background:var(--black);color:var(--white)}
+.cta-band .cb-text h3{font-family:'DM Serif Display',serif;font-size:22px;color:var(--black);margin-bottom:4px}
+.cta-band.dark .cb-text h3{color:var(--white)}
+.cta-band .cb-text p{font-size:13px;color:var(--gray-600)}
+.cta-band.dark .cb-text p{color:rgba(255,255,255,.6)}
+.cta-band .cb-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+
+/* ── STICKY BOTTOM BAR ── */
+#sticky-bar{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--gray-200);padding:12px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;z-index:90;transform:translateY(100%);transition:transform .4s cubic-bezier(.22,.68,0,1.2);box-shadow:0 -4px 24px rgba(0,0,0,.08)}
+#sticky-bar.visible{transform:translateY(0)}
+#sticky-bar .sb-left{display:flex;align-items:center;gap:16px}
+#sticky-bar .sb-step{font-size:12px;color:var(--gray-400);font-weight:500}
+#sticky-bar .sb-label{font-size:14px;font-weight:600;color:var(--black)}
+#sticky-bar .sb-actions{display:flex;gap:10px}
+
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--white);border-radius:20px;width:min(520px,92vw);padding:40px;position:relative;transform:scale(.95) translateY(16px);transition:transform .3s cubic-bezier(.22,.68,0,1.2);max-height:90vh;overflow-y:auto}
+.modal-overlay.open .modal{transform:scale(1) translateY(0)}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--gray-100);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.modal-close:hover{background:var(--gray-200)}
+.modal h2{font-family:'DM Serif Display',serif;font-size:26px;color:var(--black);margin-bottom:6px}
+.modal .modal-sub{font-size:14px;color:var(--gray-600);margin-bottom:24px;line-height:1.6}
+.form-row{margin-bottom:16px}
+.form-row label{display:block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gray-600);margin-bottom:6px}
+.form-row input,.form-row select,.form-row textarea{width:100%;padding:11px 14px;border:1.5px solid var(--gray-200);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--black);outline:none;transition:border-color .2s,box-shadow .2s;background:var(--white)}
+.form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,111,232,.1)}
+.form-row textarea{resize:vertical;min-height:80px}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-submit{width:100%;margin-top:8px;justify-content:center;font-size:15px;padding:14px}
+.modal-success{text-align:center;padding:20px 0;display:none}
+.modal-success .s-icon{font-size:48px;margin-bottom:12px}
+.modal-success h3{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:8px}
+.modal-success p{font-size:14px;color:var(--gray-600)}
+.trust-line{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--gray-400);font-weight:500}
+
+/* ── EXIT INTENT TOAST ── */
+#exit-toast{position:fixed;bottom:90px;right:24px;background:var(--white);border:1.5px solid var(--gray-200);border-radius:16px;padding:20px 22px;width:280px;box-shadow:0 16px 48px rgba(0,0,0,.12);z-index:400;transform:translateY(20px) scale(.95);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.22,.68,0,1.2)}
+#exit-toast.show{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+#exit-toast .et-close{position:absolute;top:10px;right:12px;background:none;border:none;font-size:14px;cursor:pointer;color:var(--gray-400)}
+#exit-toast p{font-size:13px;color:var(--gray-600);margin-bottom:12px;line-height:1.5}
+#exit-toast strong{color:var(--black)}
+
+/* ── FOOTER ── */
+footer{background:var(--black);color:var(--white);padding:48px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+footer img{height:28px;opacity:.85;transition:opacity .2s}
+footer img:hover{opacity:1}
+footer p{font-size:13px;color:rgba(255,255,255,.4)}
+footer a{color:var(--blue);text-decoration:none;font-weight:500;transition:color .2s}
+footer a:hover{color:#5b9ef9}
+.footer-cta-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:720px){
+  .hero,.two-col,.ads-grid,.steps-grid,.calc-grid,.tier-detail{grid-template-columns:1fr}
+  .hero{padding:60px 24px 40px}
+  section{padding:56px 24px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  #sticky-bar{padding:12px 20px}
+  .cta-band{flex-direction:column}
+  .footer-cta-wrap{align-items:flex-start}
+  .tier-detail .t-right ul{grid-template-columns:1fr}
+  footer{padding:32px 24px;flex-direction:column}
+  .form-two{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="rp"></div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <img src="https://framerusercontent.com/images/dpOLQKWA0WvXZ5TH6OdaYepBJY.png" alt="IT Geeks"/>
+  <div class="nav-links">
+    <a href="#context">Context</a>
+    <a href="#seo">SEO &amp; AEO</a>
+    <a href="#email">Email</a>
+    <a href="#ads">Paid Ads</a>
+    <a href="#investment">Investment</a>
+    <a href="#next">Next Steps</a>
+    <a href="#" class="nav-cta" onclick="openModal();return false">Get Started →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-badge"><span class="pulse-dot"></span>Growth Partnership Proposal</div>
+    <h1>Company<br/><em>Name</em></h1>
+    <p class="hero-lead">SEO, email marketing, and paid media for your D2C consumer storefront — fully managed by one dedicated team.</p>
+    <div class="hero-meta">
+      <div class="meta-card"><div class="label">Prepared For</div><div class="value">Client Name</div></div>
+      <div class="meta-card"><div class="label">Prepared By</div><div class="value">IT Geeks</div></div>
+      <div class="meta-card"><div class="label">Date</div><div class="value">March 23, 2026</div></div>
+      <div class="meta-card"><div class="label">Website</div><div class="value">Website URL</div></div>
+    </div>
+    <div class="hero-ctas" style="margin-top:24px">
+      <button class="btn-primary" onclick="openModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule Kickoff Call
+      </button>
+      <a href="#investment" class="btn-secondary">
+        View Pricing
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </a>
+    </div>
+  </div>
+  <div>
+    <div class="hero-visual">
+      <div class="vl">Services Overview</div>
+      <div class="service-pills">
+        <div class="service-pill"><span class="dot"></span>SEO &amp; AEO</div>
+        <div class="service-pill"><span class="dot"></span>Email Marketing</div>
+        <div class="service-pill"><span class="dot"></span>Meta Ads</div>
+        <div class="service-pill"><span class="dot"></span>Google Ads</div>
+      </div>
+      <div class="hero-tagline">D2C growth.<br/><em>Every channel.</em></div>
+      <div class="trust-strip">
+        <div class="trust-badge">🏆 <span>Shopify Platinum Partner</span></div>
+        <div class="trust-badge">⚡ <span>5-Day Kickoff</span></div>
+        <div class="trust-badge">🔒 <span>No Lock-In</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTEXT -->
+<section id="context">
+  <div class="section-label reveal">Context</div>
+  <h2 class="section-title reveal rd1">About Company Name</h2>
+  <p class="section-sub reveal rd2">Company Name brings authentic, curated Japanese goods to consumers through a unified D2C storefront — backed by genuine sourcing and lasting brand relationships.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+    <div class="biz-card reveal rd2">
+      <div class="type">D2C Retail</div>
+      <h3>Consumer<br/>Storefront</h3>
+      <p>Consumer-facing Japanese life store with an e-commerce storefront, a concept store, a loyalty rewards program, a lifestyle journal, and in-store workshops.</p>
+    </div>
+    <div class="biz-card reveal rd3" style="background:var(--gray-100);border-color:var(--gray-100);">
+      <div class="type">Focus</div>
+      <h3>What We're<br/>Here to Grow</h3>
+      <p>This proposal covers D2C growth only — driving consumer traffic, increasing online orders, and building a loyal repeat-buyer base through SEO, email, and paid media.</p>
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band reveal" style="margin-top:40px;">
+    <div class="cb-text">
+      <h3>Ready to start growing?</h3>
+      <p>Most clients see measurable traffic lift within 60 days of kickoff.</p>
+    </div>
+    <div class="cb-actions">
+      <button class="btn-primary" onclick="openModal()">Book a Call</button>
+      <a href="#seo" class="btn-secondary">See the Plan →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEO -->
+<section id="seo">
+  <div class="section-label reveal">SEO &amp; AEO</div>
+  <h2 class="section-title reveal rd1">Search Engine Optimization</h2>
+  <p class="section-sub reveal rd2">Product and category discovery, lifestyle search terms, and local visibility. The existing journal content is an underutilized SEO asset with significant ranking potential.</p>
+
+  <div style="margin-bottom:10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);" class="reveal">Target Keywords</div>
+  <div class="tags reveal rd1">
+    <span class="tag">Japanese bath towels</span><span class="tag">binchotan charcoal</span>
+    <span class="tag">Japanese ceramics online</span><span class="tag">Japanese home goods</span>
+    <span class="tag">Japanese lifestyle store</span><span class="tag">Imabari towel wholesale</span>
+    <span class="tag">Japanese tableware wholesale</span><span class="tag">Japanese artisan goods B2B</span>
+  </div>
+
+  <div style="margin-bottom:10px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);" class="reveal">KPIs Tracked</div>
+  <div class="kpi-row reveal rd1">
+    <div class="kpi-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Organic traffic to priority pages</div>
+    <div class="kpi-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Orders from organic traffic</div>
+    <div class="kpi-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Wholesale account applications</div>
+  </div>
+
+  <!-- TIER TABS -->
+  <div class="reveal">
+    <div class="tab-bar" id="seo-tabs">
+      <button class="tab-btn active" data-tab="foundation">Foundation</button>
+      <button class="tab-btn" data-tab="growth">Growth</button>
+      <button class="tab-btn" data-tab="scale">Scale</button>
+    </div>
+
+    <div class="tab-panel active" id="seo-foundation">
+      <div class="tier-detail">
+        <div class="t-left"><div class="t-name">Foundation</div><div class="t-price">[REDACTED]</div><div class="t-mo">per month</div><div class="t-desc">Baseline technical health. Top priority pages. Local SEO setup. Validate the approach before scaling.</div></div>
+        <div class="t-right"><ul><li>40-term keyword map</li><li>3 pages optimized/mo</li><li>2 blog posts/mo</li><li>Quarterly technical SEO</li><li>4 backlinks/mo DA30+</li><li>Local SEO setup + monthly</li><li>Google Business Profile</li><li>AEO FAQ structure</li></ul>
+        <div class="tier-cta-row"><span style="font-size:12px;color:var(--gray-400);">Best for getting started</span><button class="btn-primary" onclick="selectTierAndOpen('Foundation SEO')">Start with Foundation →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="seo-growth">
+      <div class="tier-detail blue">
+        <div class="t-left"><div class="t-name">Growth</div><div class="t-price">[REDACTED]</div><div class="t-mo">per month</div><div class="t-desc">Active growth across product and collection pages. Journal content program. Expanded local SEO. AI visibility begins.</div></div>
+        <div class="t-right"><ul><li>70-term keyword map</li><li>6 pages optimized/mo</li><li>4 blog posts/mo</li><li>Bi-monthly technical SEO</li><li>10 backlinks/mo DA30+</li><li>Local SEO setup + monthly</li><li>Schema + maintain</li><li>AEO + AI crawler access</li></ul>
+        <div class="tier-cta-row"><span style="font-size:12px;color:rgba(255,255,255,.5);">⭐ Most chosen tier</span><button class="btn-primary" style="background:#fff;color:var(--blue);" onclick="selectTierAndOpen('Growth SEO')">Select Growth Plan →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="seo-scale">
+      <div class="tier-detail">
+        <div class="t-left"><div class="t-name">Scale</div><div class="t-price">[REDACTED]</div><div class="t-mo">per month</div><div class="t-desc">Full content program, top-tier backlinks, weekly local SEO, monthly insights call included.</div></div>
+        <div class="t-right"><ul><li>130-term keyword map</li><li>10 pages optimized/mo</li><li>6 blog posts/mo</li><li>Monthly technical SEO</li><li>20 backlinks/mo DA30+</li><li>Local SEO setup + weekly</li><li>Schema + enhance</li><li>Monthly insights call</li></ul>
+        <div class="tier-cta-row"><span style="font-size:12px;color:var(--gray-400);">For maximum market share</span><button class="btn-primary" onclick="selectTierAndOpen('Scale SEO')">Go Full Scale →</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERABLES TABLE -->
+  <div style="margin-top:40px;" class="reveal">
+    <div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:14px;">Full Deliverables Comparison</div>
+    <table class="del-table">
+      <thead><tr><th>Deliverable</th><th>Foundation</th><th>Growth</th><th>Scale</th></tr></thead>
+      <tbody>
+        <tr><td>Full site SEO audit</td><td>Month 1</td><td>Month 1</td><td>Month 1</td></tr>
+        <tr><td>Keyword research + mapping</td><td>40 terms</td><td>70 terms</td><td>130 terms</td></tr>
+        <tr><td>Priority page optimization</td><td>3 / mo</td><td>6 / mo</td><td>10 / mo</td></tr>
+        <tr><td>Blog / editorial content</td><td>2 / mo</td><td>4 / mo</td><td>6 / mo</td></tr>
+        <tr><td>Technical SEO</td><td>Quarterly</td><td>Bi-monthly</td><td>Monthly</td></tr>
+        <tr><td>Backlink acquisition (DA 30+)</td><td>4 / mo</td><td>10 / mo</td><td>20 / mo</td></tr>
+        <tr><td>Local SEO</td><td>Setup + monthly</td><td>Setup + monthly</td><td>Setup + weekly</td></tr>
+        <tr><td>Google Business Profile</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Schema markup</td><td>Setup</td><td>Setup + maintain</td><td>Setup + enhance</td></tr>
+        <tr><td>AEO — AI crawler + FAQ</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Monthly KPI report</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td>✓ + insights call</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- EMAIL -->
+<section id="email">
+  <div class="section-label reveal">Email Marketing</div>
+  <h2 class="section-title reveal rd1">Per Email · No Retainer</h2>
+  <p class="section-sub reveal rd2">Every email is billed individually. No long-term commitment required. Choose full production or send-only.</p>
+
+  <div class="tab-bar reveal" id="email-tabs">
+    <button class="tab-btn active" data-tab="fullprod">Full Production</button>
+    <button class="tab-btn" data-tab="sendonly">Send-Only</button>
+  </div>
+
+  <div class="tab-panel active" id="email-fullprod">
+    <div class="two-col">
+      <div class="email-card">
+        <div class="etype">Full Production</div>
+        <h3>[REDACTED]</h3>
+        <div class="per">per email</div>
+        <p>We write copy, design the email using your imagery, and deploy via Klaviyo. Includes list selection, segmentation, UTM tagging, scheduling, and post-send performance snapshot.</p>
+      </div>
+      <div class="email-card" style="background:var(--gray-100);border-color:var(--gray-100);">
+        <div class="etype">What's Included</div>
+        <h3 style="font-size:20px;margin-bottom:12px;">Everything handled</h3>
+        <ul style="list-style:none;font-size:13px;color:var(--gray-600);line-height:2.1;">
+          <li>✓&nbsp; Copywriting</li><li>✓&nbsp; Email design with your imagery</li>
+          <li>✓&nbsp; Klaviyo deployment</li><li>✓&nbsp; List selection + segmentation</li>
+          <li>✓&nbsp; UTM tagging + scheduling</li><li>✓&nbsp; Post-send performance snapshot</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-head">D2C Volume Pricing</div>
+    <p style="font-size:13px;color:var(--gray-600);margin-bottom:18px;">Product drops, seasonal edits, journal content, loyalty updates, in-store events.</p>
+    <table class="vol-table"><thead><tr><th>Volume</th><th>Full Production</th></tr></thead>
+      <tbody><tr><td>4 emails / month</td><td>[REDACTED]</td></tr><tr><td>6 emails / month</td><td>[REDACTED]</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="tab-panel" id="email-sendonly">
+    <div class="two-col">
+      <div class="email-card">
+        <div class="etype">Send-Only</div>
+        <h3>[REDACTED]</h3>
+        <div class="per">per email</div>
+        <p>You provide the designed email. We handle copy review, Klaviyo setup, and send. Includes list selection, UTM tagging, scheduling, and post-send snapshot.</p>
+      </div>
+      <div class="email-card" style="background:var(--gray-100);border-color:var(--gray-100);">
+        <div class="etype">What's Included</div>
+        <h3 style="font-size:20px;margin-bottom:12px;">You design, we send</h3>
+        <ul style="list-style:none;font-size:13px;color:var(--gray-600);line-height:2.1;">
+          <li>✓&nbsp; Copy review</li><li>✓&nbsp; Klaviyo setup + send</li>
+          <li>✓&nbsp; List selection</li><li>✓&nbsp; UTM tagging + scheduling</li>
+          <li>✓&nbsp; Post-send snapshot</li>
+        </ul>
+      </div>
+    </div>
+    <div class="sub-head">D2C Volume Pricing</div>
+    <p style="font-size:13px;color:var(--gray-600);margin-bottom:18px;">Product drops, seasonal edits, journal content, loyalty updates, in-store events.</p>
+    <table class="vol-table"><thead><tr><th>Volume</th><th>Send-Only</th></tr></thead>
+      <tbody><tr><td>4 emails / month</td><td>[REDACTED]</td></tr><tr><td>6 emails / month</td><td>[REDACTED]</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="kpi-row reveal" style="margin-top:28px;">
+    <div class="kpi-pill">Email-attributed revenue</div>
+    <div class="kpi-pill">Email conversion rate</div>
+    <div class="kpi-pill">CTR per campaign</div>
+  </div>
+
+  <div class="cta-band dark reveal">
+    <div class="cb-text">
+      <h3>Email is your highest-ROI channel.</h3>
+      <p>Average e-commerce email ROI is $36 for every $1 spent.</p>
+    </div>
+    <div class="cb-actions">
+      <button class="btn-primary" onclick="openModal()">Add Email to My Plan</button>
+    </div>
+  </div>
+</section>
+
+<!-- ADS -->
+<section id="ads">
+  <div class="section-label reveal">Paid Ads</div>
+  <h2 class="section-title reveal rd1">Meta + Google</h2>
+  <p class="section-sub reveal rd2">D2C e-commerce with a strong visual product line and meaningful AOV — well suited for Meta and Google Shopping. Creative is on us. We use your existing photography and footage; we handle all editing, formatting, and static ad design.</p>
+  <div class="ads-grid reveal">
+    <div class="ads-card">
+      <div class="platform">Meta — Facebook + Instagram</div>
+      <h3>[REDACTED]</h3>
+      <div class="per">per month</div>
+      <ul>
+        <li><span>Campaign strategy + structure</span><span class="chk">✓</span></li>
+        <li><span>Static ad production</span><span>4–6 / mo</span></li>
+        <li><span>Video ad production</span><span>2–4 / mo</span></li>
+        <li><span>Audience management</span><span class="chk">✓</span></li>
+        <li><span>Weekly performance review</span><span class="chk">✓</span></li>
+        <li><span>Monthly report</span><span class="chk">✓</span></li>
+      </ul>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);">
+        <button class="btn-secondary" style="width:100%;justify-content:center;font-size:13px;" onclick="selectTierAndOpen('Meta Ads')">Add Meta Ads →</button>
+      </div>
+    </div>
+    <div class="ads-card">
+      <div class="platform">Google Ads</div>
+      <h3>[REDACTED]</h3>
+      <div class="per">per month</div>
+      <ul>
+        <li><span>Search + Shopping campaigns</span><span class="chk">✓</span></li>
+        <li><span>Performance Max</span><span class="chk">✓</span></li>
+        <li><span>Merchant Center management</span><span class="chk">✓</span></li>
+        <li><span>Tracking dashboard (GA4)</span><span class="chk">✓</span></li>
+        <li><span>Weekly performance review</span><span class="chk">✓</span></li>
+        <li><span>Monthly report</span><span class="chk">✓</span></li>
+      </ul>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--gray-100);">
+        <button class="btn-secondary" style="width:100%;justify-content:center;font-size:13px;" onclick="selectTierAndOpen('Google Ads')">Add Google Ads →</button>
+      </div>
+    </div>
+  </div>
+  <div class="kpi-row reveal" style="margin-top:28px;">
+    <div class="kpi-pill">Blended ROAS (Meta + Google)</div>
+    <div class="kpi-pill">Paid-attributed revenue</div>
+    <div class="kpi-pill">CTR by creative</div>
+    <div class="kpi-pill">Merchant Center feed health</div>
+  </div>
+</section>
+
+<!-- INVESTMENT -->
+<section id="investment">
+  <div class="section-label reveal">Investment Summary</div>
+  <h2 class="section-title reveal rd1">Build Your Package</h2>
+  <p class="section-sub reveal rd2">Every service is modular. Select your options — the summary updates live. Ad spend billed directly to your accounts, never through us.</p>
+
+  <div class="urgency-badge reveal"><span class="ud"></span>Proposal expires April 30, 2026 — pricing locked in for you until then</div>
+
+  <div class="calc-grid reveal">
+    <div>
+      <div class="calc-sec-title">SEO &amp; AEO Tier</div>
+      <div class="c-radio on" data-group="seo" data-label="SEO — Foundation"><div class="rl"><div class="rb"></div><span class="rname">Foundation</span></div><span class="rprice">[REDACTED]/mo</span></div>
+      <div class="c-radio" data-group="seo" data-label="SEO — Growth"><div class="rl"><div class="rb"></div><span class="rname">Growth ⭐</span></div><span class="rprice">[REDACTED]/mo</span></div>
+      <div class="c-radio" data-group="seo" data-label="SEO — Scale"><div class="rl"><div class="rb"></div><span class="rname">Scale</span></div><span class="rprice">[REDACTED]/mo</span></div>
+
+      <div class="calc-sec-title" style="margin-top:20px;">Email — D2C Volume</div>
+      <div class="c-radio on" data-group="email" data-label="Email — 4/mo Full Production"><div class="rl"><div class="rb"></div><span class="rname">4/mo · Full Production</span></div><span class="rprice">[REDACTED]/mo</span></div>
+      <div class="c-radio" data-group="email" data-label="Email — 4/mo Send-Only"><div class="rl"><div class="rb"></div><span class="rname">4/mo · Send-Only</span></div><span class="rprice">[REDACTED]/mo</span></div>
+      <div class="c-radio" data-group="email" data-label="Email — 6/mo Full Production"><div class="rl"><div class="rb"></div><span class="rname">6/mo · Full Production</span></div><span class="rprice">[REDACTED]/mo</span></div>
+      <div class="c-radio" data-group="email" data-label="Email — 6/mo Send-Only"><div class="rl"><div class="rb"></div><span class="rname">6/mo · Send-Only</span></div><span class="rprice">[REDACTED]/mo</span></div>
+    </div>
+    <div>
+      <div class="calc-sec-title">Paid Ads Platform</div>
+      <div class="c-check on" data-key="meta" data-label="Meta Ads"><div class="cl"><div class="cb"></div><span class="cname">Meta Ads (Facebook + Instagram)</span></div><span class="cprice">[REDACTED]/mo</span></div>
+      <div class="c-check on" data-key="google" data-label="Google Ads"><div class="cl"><div class="cb"></div><span class="cname">Google Ads</span></div><span class="cprice">[REDACTED]/mo</span></div>
+
+      <div class="total-box">
+        <div class="tbl">Your Estimate</div>
+        <h3 id="summary-title">Foundation SEO · Email · Both Ad Platforms</h3>
+        <div id="calc-lines"></div>
+        <div class="total-row">
+          <span class="tl">Monthly Total</span>
+          <span id="total-display">[REDACTED]</span>
+        </div>
+        <div class="total-note">Ad spend billed directly to your accounts — not included above.</div>
+        <button class="btn-primary calc-cta" onclick="openModal()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.1a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17z"/></svg>
+          Lock In This Package
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section id="next">
+  <div class="section-label reveal">Next Steps</div>
+  <h2 class="section-title reveal rd1">How We Get Started</h2>
+  <p class="section-sub reveal rd2">Confirm your services and complete the kickoff checklist below. Once initial payment is received, we schedule kickoff within 5 business days.</p>
+  <div class="steps-grid reveal">
+    <div class="step-item" data-n="01"><div class="step-num">01</div><div><h4>Google Search Console + GA4 access</h4><p>For your D2C storefront</p></div></div>
+    <div class="step-item" data-n="02"><div class="step-num">02</div><div><h4>Klaviyo account access</h4><p>D2C account</p></div></div>
+    <div class="step-item" data-n="03"><div class="step-num">03</div><div><h4>Meta Business Manager + ad account</h4><p>For paid social campaigns</p></div></div>
+    <div class="step-item" data-n="04"><div class="step-num">04</div><div><h4>Google Ads + Merchant Center access</h4><p>For Shopping + Search campaigns</p></div></div>
+    <div class="step-item" data-n="05"><div class="step-num">05</div><div><h4>Creative asset library</h4><p>Photography, video footage, and brand assets</p></div></div>
+  </div>
+  <p class="steps-hint reveal" style="margin-top:14px;">Click items to mark as confirmed ✓</p>
+
+  <div class="cta-band dark reveal" style="margin-top:40px;">
+    <div class="cb-text">
+      <h3>Ready to confirm?</h3>
+      <p>Kickoff scheduled within 5 business days of payment. No lock-in required.</p>
+    </div>
+    <div class="cb-actions">
+      <button class="btn-primary" onclick="openModal()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule Kickoff Call
+      </button>
+      <a href="mailto:hello@itgeeks.com" class="btn-secondary" style="background:transparent;border-color:rgba(255,255,255,.2);color:#fff;">Email Us Instead</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <img src="https://framerusercontent.com/images/19wB6A4OLiaI8yfyBRjGQhu3kQw.png?width=300&height=68" alt="IT Geeks"/>
+    <p style="margin-top:10px;">Shopify Plus Agency · Shopify Platinum Partner</p>
+  </div>
+  <div class="footer-cta-wrap">
+    <button class="btn-primary" onclick="openModal()">Schedule Kickoff Call →</button>
+    <p><a href="https://itgeeks.com" target="_blank">itgeeks.com</a></p>
+  </div>
+</footer>
+
+<!-- STICKY BOTTOM BAR -->
+<div id="sticky-bar">
+  <div class="sb-left">
+    <div>
+      <div class="sb-step" id="sb-progress-text">Reading proposal…</div>
+      <div class="sb-label" id="sb-section-label">Growth Partnership · Company Name</div>
+    </div>
+  </div>
+  <div class="sb-actions">
+    <a href="#investment" class="btn-secondary" style="font-size:13px;padding:9px 16px;">View Pricing</a>
+    <button class="btn-primary" style="font-size:13px;padding:9px 18px;" onclick="openModal()">Get Started →</button>
+  </div>
+</div>
+
+<!-- GET STARTED MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+
+    <div id="modal-form-wrap">
+      <h2>Schedule Your Kickoff</h2>
+      <p class="modal-sub">Tell us where you'd like to start and we'll have a proposal finalised and a kickoff slot ready within 2 business days.</p>
+
+      <div class="form-two">
+        <div class="form-row"><label>First Name</label><input type="text" placeholder="Jane" id="f-fname"/></div>
+        <div class="form-row"><label>Last Name</label><input type="text" placeholder="Doe" id="f-lname"/></div>
+      </div>
+      <div class="form-row"><label>Email</label><input type="email" placeholder="jane@company.com" id="f-email"/></div>
+      <div class="form-row"><label>Website URL</label><input type="text" placeholder="https://yourstore.com" id="f-url"/></div>
+      <div class="form-row"><label>Services You're Interested In</label>
+        <select id="f-service">
+          <option value="">Select a starting point…</option>
+          <option id="modal-preselect" value="seo">SEO &amp; AEO</option>
+          <option value="email">Email Marketing</option>
+          <option value="ads">Paid Ads (Meta + Google)</option>
+          <option value="all">Full Package — All Services</option>
+        </select>
+      </div>
+      <div class="form-row"><label>Anything else? (optional)</label><textarea placeholder="Monthly budget, current challenges, timeline…" id="f-message"></textarea></div>
+
+      <button class="btn-primary form-submit" onclick="submitForm()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Confirm &amp; Schedule Kickoff
+      </button>
+
+      <div class="trust-line" style="margin-top:16px;">
+        <div class="trust-item">🔒 <span>No commitment required</span></div>
+        <div class="trust-item">⚡ <span>Reply within 2 business days</span></div>
+        <div class="trust-item">🏆 <span>Shopify Platinum Partner</span></div>
+      </div>
+    </div>
+
+    <div class="modal-success" id="modal-success">
+      <div class="s-icon">🎉</div>
+      <h3>You're confirmed!</h3>
+      <p>We'll be in touch within 2 business days to lock in your kickoff slot and finalise the details.</p>
+      <div class="trust-line" style="margin-top:20px;">
+        <div class="trust-item">📧 <span>Check your inbox</span></div>
+        <div class="trust-item">📞 <span>We'll call to confirm</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXIT INTENT TOAST -->
+<div id="exit-toast">
+  <button class="et-close" onclick="document.getElementById('exit-toast').classList.remove('show')">×</button>
+  <p><strong>Before you go —</strong><br/>Lock in your pricing before April 30. Takes 2 minutes.</p>
+  <button class="btn-primary" style="width:100%;justify-content:center;font-size:13px;padding:10px;" onclick="document.getElementById('exit-toast').classList.remove('show');openModal()">Schedule a Call →</button>
+</div>
+
+<script>
+/* ── READING PROGRESS ── */
+const rp = document.getElementById('rp');
+window.addEventListener('scroll', () => {
+  rp.style.width = (window.scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
+}, {passive:true});
+
+/* ── NAV SHADOW ── */
+const mainNav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => mainNav.classList.toggle('scrolled', scrollY > 20), {passive:true});
+
+/* ── SCROLL REVEAL ── */
+const ro = new IntersectionObserver(e => e.forEach(x => { if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);} }), {threshold:.1});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── ACTIVE NAV ── */
+const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+const no = new IntersectionObserver(e => e.forEach(x => {
+  if(x.isIntersecting){ navLinks.forEach(l=>l.classList.remove('active')); const a=document.querySelector(`.nav-links a[href="#${x.target.id}"]`); if(a)a.classList.add('active'); }
+}), {rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>no.observe(s));
+
+/* ── TABS ── */
+function setupTabs(barId, prefix) {
+  const bar = document.getElementById(barId); if(!bar) return;
+  bar.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => {
+    bar.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+    document.querySelectorAll(`[id^="${prefix}-"]`).forEach(p=>p.classList.remove('active'));
+    const t = document.getElementById(prefix+'-'+btn.dataset.tab); if(t) t.classList.add('active');
+  }));
+}
+setupTabs('seo-tabs','seo'); setupTabs('email-tabs','email');
+
+/* ── CALCULATOR ── */
+document.querySelectorAll('.c-radio').forEach(opt => opt.addEventListener('click', () => {
+  document.querySelectorAll(`.c-radio[data-group="${opt.dataset.group}"]`).forEach(o=>o.classList.remove('on'));
+  opt.classList.add('on'); refreshCalc();
+}));
+document.querySelectorAll('.c-check').forEach(opt => opt.addEventListener('click', () => { opt.classList.toggle('on'); refreshCalc(); }));
+
+function getRadio(g){ const s=document.querySelector(`.c-radio[data-group="${g}"].on`); return s?{label:s.dataset.label,price:s.querySelector('.rprice').textContent}:null; }
+function getCheck(k){ const e=document.querySelector(`.c-check[data-key="${k}"]`); return e&&e.classList.contains('on')?{label:e.dataset.label,price:e.querySelector('.cprice').textContent}:null; }
+
+function refreshCalc(){
+  const seo=getRadio('seo'),email=getRadio('email'),meta=getCheck('meta'),google=getCheck('google');
+  const items=[seo,email,meta,google].filter(Boolean);
+  const parts=[];
+  if(seo)parts.push(seo.label.replace('SEO — ','')+ ' SEO');
+  if(email)parts.push(email.label.replace('Email — ',''));
+  if(meta&&google)parts.push('Both Ad Platforms');
+  else if(meta)parts.push('Meta Ads');
+  else if(google)parts.push('Google Ads');
+  document.getElementById('summary-title').textContent=parts.join(' · ')||'Select your services';
+  let html='';
+  if(!items.length) html='<div class="cl-row"><span class="cn" style="font-style:italic;color:rgba(255,255,255,.3)">No services selected</span><span class="cp">—</span></div>';
+  else items.forEach(i=>html+=`<div class="cl-row"><span class="cn">${i.label}</span><span class="cp">${i.price}</span></div>`);
+  document.getElementById('calc-lines').innerHTML=html;
+  const td=document.getElementById('total-display');
+  td.classList.remove('bump'); void td.offsetWidth; td.classList.add('bump');
+  setTimeout(()=>td.classList.remove('bump'),400);
+}
+refreshCalc();
+
+/* ── STICKY BAR ── */
+const stickyBar = document.getElementById('sticky-bar');
+const sbText = document.getElementById('sb-section-label');
+const sbProgress = document.getElementById('sb-progress-text');
+const sectionNames = {context:'About the Client',seo:'SEO & AEO',email:'Email Marketing',ads:'Paid Ads',investment:'Investment',next:'Next Steps'};
+let shownStickyAt = false;
+window.addEventListener('scroll', () => {
+  const pct = Math.round(window.scrollY / (document.body.scrollHeight - innerHeight) * 100);
+  if(pct > 15 && !shownStickyAt){ stickyBar.classList.add('visible'); shownStickyAt=true; }
+  if(pct < 5){ stickyBar.classList.remove('visible'); shownStickyAt=false; }
+  sbProgress.textContent = pct < 100 ? `${pct}% through the proposal` : 'Proposal complete ✓';
+}, {passive:true});
+const sno = new IntersectionObserver(e => e.forEach(x => {
+  if(x.isIntersecting && sectionNames[x.target.id]) sbText.textContent = sectionNames[x.target.id];
+}), {rootMargin:'-30% 0px -65% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>sno.observe(s));
+
+/* ── MODAL ── */
+function openModal(){ document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(){ document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+function selectTierAndOpen(tier){
+  const sel=document.getElementById('modal-preselect');
+  if(tier.includes('SEO'))sel.value='seo';
+  else if(tier.includes('Email'))sel.value='email';
+  else if(tier.includes('Meta')||tier.includes('Google'))sel.value='ads';
+  openModal();
+}
+function submitForm(){
+  const email=document.getElementById('f-email').value;
+  const fname=document.getElementById('f-fname').value;
+  if(!fname||!email){ alert('Please fill in your name and email.'); return; }
+  document.getElementById('modal-form-wrap').style.display='none';
+  document.getElementById('modal-success').style.display='block';
+}
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+
+/* ── EXIT INTENT ── */
+let exitShown=false;
+document.addEventListener('mouseleave',e=>{
+  if(e.clientY<10 && !exitShown){ exitShown=true; setTimeout(()=>document.getElementById('exit-toast').classList.add('show'),300); }
+});
+// Auto-hide exit toast after 8s
+setTimeout(()=>{ const t=document.getElementById('exit-toast'); if(t.classList.contains('show')) t.classList.remove('show'); },10000);
+
+/* ── STEPS CHECKLIST ── */
+document.querySelectorAll('.step-item').forEach(item => item.addEventListener('click',()=>{
+  const done=item.classList.toggle('done');
+  item.querySelector('.step-num').textContent=done?'✓':item.dataset.n;
+}));
+</script>
+</body>
+</html>
